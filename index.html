@@ -239,7 +239,7 @@
     let searchResults=document.getElementById("search_results");
     async function searchList() {
         let name=document.getElementById("search_bar").value;
-        let res=await fetch(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=5&q=${name}&type=video&key=#AIzaSyCFylZe4T-XCAmRhIcjkPAGEmAaG6qHmjI`);
+        let res=await fetch(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=5&q=${name}&type=video&key=AIzaSyCFylZe4T-XCAmRhIcjkPAGEmAaG6qHmjI`);
         let data=await res.json();
         console.log('data:', data);
         appendSearchResults(data.items)
@@ -250,7 +250,9 @@
 
 
     function appendSearchResults(list) {
+      
         let parent=document.getElementById("search_results");
+        parent.innerHTML=null;
         list.forEach(({snippet:{title}}) => {
             console.log('items:', title);
             
@@ -299,7 +301,7 @@
     
     let videos=document.getElementById("videos");
     async function searchVideos(query) {
-        let res = await fetch(`https://youtube.googleapis.com/youtube/v3/search?q=${query}&type=video&key=#AIzaSyCFylZe4T-XCAmRhIcjkPAGEmAaG6qHmjI&maxResults=20`)
+        let res = await fetch(`https://youtube.googleapis.com/youtube/v3/search?q=${query}&type=video&key=AIzaSyCFylZe4T-XCAmRhIcjkPAGEmAaG6qHmjI&maxResults=20`)
         let data= await res.json();
         console.log('data:', data);
         appendVideos(data.items)
@@ -329,7 +331,7 @@
 
 
     async function searchVideos1() {
-        let res = await fetch(`https://youtube.googleapis.com/youtube/v3/videos?chart=mostPopular&maxResults=20&key=#AIzaSyCFylZe4T-XCAmRhIcjkPAGEmAaG6qHmjI`)
+        let res = await fetch(`https://youtube.googleapis.com/youtube/v3/videos?chart=mostPopular&maxResults=20&key=AIzaSyCFylZe4T-XCAmRhIcjkPAGEmAaG6qHmjI`)
         let data= await res.json();
         console.log('data:', data);
         appendVideos1(data.items)
