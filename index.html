@@ -115,6 +115,7 @@
     #maincontainer {
       display: flex;
       flex-direction: row;
+      padding-top: 20px;
     }
     #maincontainer > div:nth-child(1) {
       flex-basis: 15%;
@@ -148,7 +149,9 @@
       top:-25px;
       left:70px;
     }
-
+    #videos {
+      margin-top:40px;
+    }
 
 
     .iconsize {
@@ -182,8 +185,8 @@
       <div>
         <span class="material-icons iconsize"> notifications </span>
       </div>
-      <div>
-        <a href="signup.html"><button><span class="material-icons"> account_circle </span><span id="sign1">SIGN IN</span></button></a>
+      <div id="change-div">
+        <a href="Login.html"><button><span class="material-icons"> account_circle </span><span id="sign1">SIGN IN</span></button></a>
       </div>
     </div>
     <div id="search_results">
@@ -252,10 +255,24 @@
     </div>
   </body>
   <script>
+
+  let datastorage=JSON.parse(localStorage.getItem("username"));
+
+    if(datastorage) {
+      let divone=document.getElementById("change-div");
+
+      divone.innerHTML=null;
+      let p=document.createElement("p");
+      p.innerText=datastorage.username;
+      p.style.marginTop="10px";
+      divone.appendChild(p);
+
+    }
+
     let searchResults=document.getElementById("search_results");
     async function searchList() {
         let name=document.getElementById("search_bar").value;
-        let res=await fetch(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=5&q=${name}&type=video&key=#AIzaSyCFylZe4T-XCAmRhIcjkPAGEmAaG6qHmjI`);
+        let res=await fetch(`https://youtube.googleapis.com/youtube/v3/search?part=snippet&maxResults=5&q=${name}&type=video&key=AIzaSyCFylZe4T-XCAmRhIcjkPAGEmAaG6qHmjI`);
         let data=await res.json();
         console.log('data:', data);
         appendSearchResults(data.items)
@@ -317,7 +334,7 @@
     
     let videos=document.getElementById("videos");
     async function searchVideos(query) {
-        let res = await fetch(`https://youtube.googleapis.com/youtube/v3/search?q=${query}&type=video&key=#AIzaSyCFylZe4T-XCAmRhIcjkPAGEmAaG6qHmjI&maxResults=20`)
+        let res = await fetch(`https://youtube.googleapis.com/youtube/v3/search?q=${query}&type=video&key=AIzaSyCFylZe4T-XCAmRhIcjkPAGEmAaG6qHmjI&maxResults=20`)
         let data= await res.json();
         console.log('data:', data);
         appendVideos(data.items)
@@ -347,7 +364,7 @@
 
 
     async function searchVideos1() {
-        let res = await fetch(`https://youtube.googleapis.com/youtube/v3/videos?chart=mostPopular&maxResults=20&key=#AIzaSyCFylZe4T-XCAmRhIcjkPAGEmAaG6qHmjI`)
+        let res = await fetch(`https://youtube.googleapis.com/youtube/v3/videos?chart=mostPopular&maxResults=20&key=AIzaSyCFylZe4T-XCAmRhIcjkPAGEmAaG6qHmjI`)
         let data= await res.json();
         console.log('data:', data);
         appendVideos1(data.items)
